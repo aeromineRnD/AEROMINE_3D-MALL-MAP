@@ -1,6 +1,6 @@
 # AEROMINE 3D Mall Map
 
-An interactive 3D mall directory concept developed by the **AEROMINE R&D Team**. The application renders a real GLTF/GLB building model in the browser and overlays smart, always-visible floating tags above each shop — enabling users to explore the mall layout intuitively and access shop information with a single click.
+An interactive 3D mall directory concept developed by the **AEROMINE R&D Team**. The application renders a real GLTF/GLB building model in the browser and overlays smart, always-visible floating tags above each shop - enabling users to explore the mall layout intuitively and access shop information with a single click.
 
 ---
 
@@ -8,7 +8,7 @@ An interactive 3D mall directory concept developed by the **AEROMINE R&D Team**.
 
 Traditional mall directories are static floor plans that require users to orient themselves manually. This project explores a fully interactive 3D alternative: users orbit, pan, and zoom around a true-to-scale 3D model of the mall, while contextual tags float above each building or shop unit. Clicking a tag opens a detail panel with the shop's name, category, opening hours, contact information, and photo.
 
-The approach is data-driven — adding a new shop requires only a single entry in a configuration file, with no changes to the rendering or interaction logic.
+The approach is data-driven - adding a new shop requires only a single entry in a configuration file, with no changes to the rendering or interaction logic.
 
 ---
 
@@ -95,7 +95,7 @@ npm run build
 }
 ```
 
-No other code changes are required — the tag appears automatically on next load.
+No other code changes are required - the tag appears automatically on next load.
 
 ---
 
