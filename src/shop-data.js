@@ -3,7 +3,7 @@
  * meshName must exactly match the node name in the GLTF scene graph
  * (the name set in Blender's Outliner panel before export).
  */
-export const SHOPS = [
+export const SHOPS_P1 = [
   {
     meshName: 'test1',
     name: 'WE ARE AEROMINE',
@@ -102,5 +102,66 @@ export const SHOPS = [
     phone: '+30 210 000 0009',
     website: 'www.villagecinema.gr',
     photo: null,
+  },
+];
+
+// Backward-compat alias
+export const SHOPS = SHOPS_P1;
+
+export const SHOPS_P2 = [
+  {
+    meshName: 'object_03',
+    name: 'FitZone',
+    category: 'Gym & Wellness',
+    icon: '🏋️',
+    hours: 'Mon – Fri: 06:00 – 23:00 | Sat – Sun: 08:00 – 21:00',
+    description: 'Full-equipment gym with personal training and yoga classes.',
+    phone: '+30 210 000 0003',
+    website: 'www.fitzone-mall.gr',
+    photo: '/models/images/gym.jpeg',
+  },
+  {
+    meshName: 'object_10',
+    name: 'La Piazza',
+    category: 'Restaurant',
+    icon: '🍕',
+    hours: 'Mon – Sun: 12:00 – 23:00',
+    description: 'Authentic Italian cuisine in a warm, relaxed setting.',
+    phone: '+30 210 000 0004',
+    website: 'www.lapiazza-mall.gr',
+    photo: '/models/images/pizza.jpg',
+  },
+  {
+    meshName: 'object_11',
+    name: 'Green Bowl',
+    category: 'Health Food',
+    icon: '🥗',
+    hours: 'Mon – Sun: 09:00 – 20:00',
+    description: 'Fresh salads, smoothie bowls, and organic juices.',
+    phone: '+30 210 000 0005',
+    website: 'www.greenbowl-mall.gr',
+    photo: '/models/images/salad.jpeg',
+  },
+  {
+    meshName: 'object_20',
+    name: 'Tech Hub',
+    category: 'Electronics',
+    icon: '📱',
+    hours: 'Mon – Sat: 10:00 – 21:00 | Sun: 11:00 – 19:00',
+    description: 'Latest gadgets, accessories, and on-site repair services.',
+    phone: '+30 210 000 0002',
+    website: 'www.techhub-mall.gr',
+    photo: '/models/images/techHub.jpg',
+  },
+  {
+    meshName: 'object_13',
+    name: 'Spark Kids',
+    category: 'Toys & Games',
+    icon: '🧸',
+    hours: 'Mon – Sun: 10:00 – 20:00',
+    description: 'Educational toys, games, and weekend activity workshops.',
+    phone: '+30 210 000 0006',
+    website: 'www.sparkkids-mall.gr',
+    photo: '/models/images/toyShop.jpg',
   },
 ];
