@@ -1,48 +1,65 @@
-import { Viewer }     from './viewer.js';
-import { TagManager } from './tag-manager.js';
-import { Popup }      from './popup.js';
+import { Viewer, MODEL_URL_P1, MODEL_URL_P2 } from './viewer.js';
+import { TagManager }         from './tag-manager.js';
+import { Popup }              from './popup.js';
+import { SHOPS_P1, SHOPS_P2 } from './shop-data.js';
+
+const PHASES = {
+  1: { url: MODEL_URL_P1, shops: SHOPS_P1 },
+  2: { url: MODEL_URL_P2, shops: SHOPS_P2 },
+};
 
 async function init() {
   const appEl     = document.getElementById('app');
   const spinnerEl = document.getElementById('spinner');
+  const btn1      = document.getElementById('phase-btn-1');
+  const btn2      = document.getElementById('phase-btn-2');
 
-  // 1. Scene, renderers, controls
-  const viewer = new Viewer(appEl);
-
-  // 2. Popup panel (hidden until a tag is clicked)
-  const popup = new Popup(appEl);
-
-  // 3. Tag manager (builds tags after model loads)
+  const viewer     = new Viewer(appEl);
+  const popup      = new Popup(appEl);
   const tagManager = new TagManager(viewer, popup);
 
-  spinnerEl.style.display = '';
+  let currentPhase = 1;
 
-  try {
-    // 4. Load the GLTF model from public/models/test.gltf
-    await viewer.load();
+  async function loadPhase(phase) {
+    if (phase === currentPhase && viewer.content) return;
 
-    // 5. Attach floating tags to all shops found in the scene
-    tagManager.buildTags();
+    popup.hide?.();
+    tagManager.dispose();
+    viewer.clearContent();
+    spinnerEl.style.display = '';
 
-  } catch (err) {
-    console.error('[3D Mall] Failed to load model:', err);
-    appEl.innerHTML = `
-      <div style="
-        position: absolute; inset: 0;
-        display: flex; align-items: center; justify-content: center;
-        font-family: system-ui, sans-serif; color: #b10026; font-size: 0.9rem;
-        text-align: center; padding: 2rem;
-      ">
-        <div>
-          <strong>Could not load 3D scene.</strong><br>
-          Make sure <code>public/models/test.gltf</code> and <code>test.bin</code> exist.<br>
-          <small style="color:#888">${err.message}</small>
+    btn1.classList.toggle('active', phase === 1);
+    btn2.classList.toggle('active', phase === 2);
+
+    try {
+      const { url, shops } = PHASES[phase];
+      await viewer.load(url);
+      tagManager.buildTags(shops);
+      currentPhase = phase;
+    } catch (err) {
+      console.error('[3D Mall] Failed to load model:', err);
+      appEl.innerHTML = `
+        <div style="
+          position: absolute; inset: 0;
+          display: flex; align-items: center; justify-content: center;
+          font-family: system-ui, sans-serif; color: #b10026; font-size: 0.9rem;
+          text-align: center; padding: 2rem;
+        ">
+          <div>
+            <strong>Could not load 3D scene.</strong><br>
+            <small style="color:#888">${err.message}</small>
+          </div>
         </div>
-      </div>
-    `;
-  } finally {
-    spinnerEl.style.display = 'none';
+      `;
+    } finally {
+      spinnerEl.style.display = 'none';
+    }
   }
+
+  btn1.addEventListener('click', () => loadPhase(1));
+  btn2.addEventListener('click', () => loadPhase(2));
+
+  await loadPhase(1);
 }
 
 document.addEventListener('DOMContentLoaded', init);

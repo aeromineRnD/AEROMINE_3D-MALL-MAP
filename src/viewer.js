@@ -16,7 +16,8 @@ import { OrbitControls }   from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { CSS2DRenderer }   from 'three/addons/renderers/CSS2DRenderer.js';
 
-const MODEL_URL = '/models/mallFinal.gltf';
+export const MODEL_URL_P1 = '/models/mallFinal.gltf';
+export const MODEL_URL_P2 = '/models/New_model/new_mall.gltf';
 
 export class Viewer {
   constructor(container) {
@@ -127,7 +128,14 @@ export class Viewer {
   // Model loading
   // -------------------------------------------------------------------------
 
-  async load() {
+  clearContent() {
+    if (this.content) {
+      this.scene.remove(this.content);
+      this.content = null;
+    }
+  }
+
+  async load(url = MODEL_URL_P1) {
     const loader = new GLTFLoader();
 
     const draco = new DRACOLoader();
@@ -142,7 +150,7 @@ export class Viewer {
     ).detectSupport(this.renderer);
     loader.setKTX2Loader(ktx2);
 
-    const gltf = await loader.loadAsync(MODEL_URL);
+    const gltf = await loader.loadAsync(url);
     const root = gltf.scene ?? gltf.scenes[0];
 
     if (!root) throw new Error('[3D Mall] No scene found in GLTF');

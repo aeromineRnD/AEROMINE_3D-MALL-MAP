@@ -1,6 +1,6 @@
 import { Box3, Vector3 }  from 'three';
 import { CSS2DObject }    from 'three/addons/renderers/CSS2DRenderer.js';
-import { SHOPS }          from './shop-data.js';
+import { SHOPS_P1 }       from './shop-data.js';
 
 // Clearance above the top face of a building's bounding box (world units)
 const TAG_Y_OFFSET = 0.5;
@@ -17,7 +17,7 @@ export class TagManager {
    * Traverses the loaded scene, finds meshes whose names match shop-data,
    * and attaches a CSS2DObject tag above each one.
    */
-  buildTags() {
+  buildTags(shops = SHOPS_P1) {
     const root = this.viewer.content;
     if (!root) {
       console.warn('[TagManager] No content loaded — call viewer.load() first.');
@@ -25,7 +25,7 @@ export class TagManager {
     }
 
     // Fast lookup: meshName → shopData
-    const shopMap = new Map(SHOPS.map(s => [s.meshName, s]));
+    const shopMap = new Map(shops.map(s => [s.meshName, s]));
 
     root.traverse((node) => {
       const shop = shopMap.get(node.name);
