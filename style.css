@@ -110,6 +110,40 @@ header {
   letter-spacing: 0.01em;
 }
 
+/* Phase toggle */
+.phase-toggle {
+  display: flex;
+  gap: 6px;
+  margin-top: 0.35rem;
+}
+
+.phase-btn {
+  font-family: var(--font-primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: var(--btn-bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+  user-select: none;
+}
+
+.phase-btn:hover {
+  background: var(--btn-hover-bg);
+  color: var(--text-primary);
+}
+
+.phase-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
 .header-hints {
   display: flex;
   align-items: center;
